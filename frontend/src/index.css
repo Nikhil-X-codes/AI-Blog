@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* CKEditor Custom Styles */
+.ck-editor__editable {
+  min-height: 500px !important;
+  max-height: 700px !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  padding: 2rem !important;
+  color: #1a1a1a !important;
+}
+
+.ck-editor__editable:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+  background: #ffffff !important;
+}
+
+.ck-content h1 {
+  font-size: 2.5em !important;
+  font-weight: bold !important;
+  margin-top: 0.67em !important;
+  margin-bottom: 0.67em !important;
+  color: #0a0a0a !important;
+}
+
+.ck-content h2 {
+  font-size: 2em !important;
+  font-weight: bold !important;
+  margin-top: 0.83em !important;
+  margin-bottom: 0.83em !important;
+  color: #0a0a0a !important;
+}
+
+.ck-content h3 {
+  font-size: 1.5em !important;
+  font-weight: bold !important;
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+  color: #0a0a0a !important;
+}
+
+.ck-content p {
+  margin-bottom: 1em !important;
+  color: #1a1a1a !important;
+}
+
+.ck-content blockquote {
+  border-left: 4px solid #3b82f6 !important;
+  padding-left: 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  font-style: italic !important;
+  color: #4b5563 !important;
+}
+
+.ck-content ul,
+.ck-content ol {
+  margin: 1rem 0 !important;
+  padding-left: 2rem !important;
+}
+
+.ck-content li {
+  margin-bottom: 0.5rem !important;
+}
+
+.ck-content a {
+  color: #3b82f6 !important;
+  text-decoration: underline !important;
+}
+
+.ck-content figure.image {
+  margin: 1.5rem 0 !important;
+}
+
+.ck-content figure.image img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Toolbar Styling */
+.ck.ck-toolbar {
+  border-color: #e5e7eb !important;
+  background: #f9fafb !important;
+  padding: 0.5rem !important;
+}
+
+.ck.ck-button:not(.ck-disabled):hover {
+  background: #e5e7eb !important;
+}
+
+.ck.ck-button.ck-on {
+  background: #dbeafe !important;
+  color: #1e40af !important;
+}
+
+/* Selection Highlight */
+::selection {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+/* React Quill Dark Theme Improvements */
+.quill-editor .ql-editor {
+  color: #0a0a0a !important;
+  background: #ffffff !important;
+}
+
+.quill-editor .ql-editor h1,
+.quill-editor .ql-editor h2,
+.quill-editor .ql-editor h3,
+.quill-editor .ql-editor h4,
+.quill-editor .ql-editor h5,
+.quill-editor .ql-editor h6 {
+  color: #0a0a0a !important;
+  font-weight: bold !important;
+}
+
+.quill-editor .ql-editor p,
+.quill-editor .ql-editor li,
+.quill-editor .ql-editor blockquote {
+  color: #1a1a1a !important;
+}
+
+/* Smooth Animations */
+* {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

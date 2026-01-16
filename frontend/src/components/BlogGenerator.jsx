@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { blogAPI } from '../api';
-import Button from '../pages/Button';
 
 const TONES = [
   { value: 'professional', label: 'Professional' },
@@ -26,7 +25,6 @@ export default function BlogGenerator({ onBlogGenerated }) {
     setLoading(true);
 
     try {
-      // Request Markdown format for proper formatting in exports and preview
       const response = await blogAPI.generateBlog(topic, tone, '', 'markdown');
       if (response?.data) {
         onBlogGenerated(response.data);
@@ -87,14 +85,13 @@ export default function BlogGenerator({ onBlogGenerated }) {
           </select>
         </div>
 
-        <Button
+        <button
           type="submit"
           disabled={loading || !topic.trim()}
-          loading={loading}
-          className="w-full"
+          className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Generating Blog... (This may take up to 2 minutes)' : 'Generate Blog'}
-        </Button>
+        </button>
       </form>
     </div>
   );

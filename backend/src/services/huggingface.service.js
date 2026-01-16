@@ -49,7 +49,6 @@ class HuggingFaceService {
       };
       
       const normalizedTone = toneMap[tone.toLowerCase()] || tone;
-      console.log('Tone (normalized):', normalizedTone);
       
       const client = await this.initializeClient();
 
@@ -90,7 +89,6 @@ class HuggingFaceService {
   processImageData(images) {
     
     if (!images) {
-      console.log('❌ Images is null/undefined');
       return [];
     }
 
@@ -101,12 +99,10 @@ class HuggingFaceService {
     }
 
     if (!Array.isArray(imageArray)) {
-      console.log('❌ Images is not an array after processing');
       return [];
     }
 
     if (imageArray.length === 0) {
-      console.log('⚠️ Images array is empty - Check if UNSPLASH_API_KEY is set in Gradio Space');
       return [];
     }
 
@@ -139,13 +135,7 @@ class HuggingFaceService {
         source: 'huggingface',
         index: index
       };
-    }).filter(img => {
-      const hasUrl = !!img.url;
-      if (!hasUrl) {
-        console.log('⚠️ Filtered out image with no URL');
-      }
-      return hasUrl;
-    });
+    }).filter(img => !!img.url);
     
     return processed;
   }
@@ -169,8 +159,7 @@ class HuggingFaceService {
 
       return result.data[0] || text;
     } catch (error) {
-      console.error('Rewrite Error:', error.message);
-      throw new Error('Failed to rewrite text.');
+      throw new Error(`Failed to rewrite text: ${error.message}`);
     }
   }
 
@@ -178,15 +167,17 @@ class HuggingFaceService {
     try {
       const client = await this.initializeClient();
 
+      // Convert keywords array to comma-separated string if it's an array
+      const keywordsString = Array.isArray(keywords) ? keywords.join(', ') : (keywords || '');
+
       const result = await client.predict("/improve_seo", {
         text: text,
-        keywords: keywords
+        keywords: keywordsString
       });
 
       return result.data[0] || text;
     } catch (error) {
-      console.error('SEO Improvement Error:', error.message);
-      throw new Error('Failed to improve SEO.');
+      throw new Error(`Failed to improve SEO: ${error.message}`);
     }
   }
 
@@ -209,8 +200,7 @@ class HuggingFaceService {
 
       return result.data[0] || text;
     } catch (error) {
-      console.error('Tone Change Error:', error.message);
-      throw new Error('Failed to change tone.');
+      throw new Error(`Failed to change tone: ${error.message}`);
     }
   }
 

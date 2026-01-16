@@ -4,7 +4,6 @@ import BlogGenerator from '../components/BlogGenerator';
 import RichTextEditor from '../components/RichTextEditor';
 import ImageGallery from '../components/ImageGallery';
 import Export from '../components/Export';
-import Button from './Button';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -39,24 +38,26 @@ export default function Dashboard() {
           <div className="flex gap-3">
             {currentBlog && (
               <>
-                <Button
+                <button
                   onClick={() => setShowImageGallery(!showImageGallery)}
-                  className={showImageGallery ? 'bg-blue-600 text-white' : ''}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${showImageGallery ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
                 >
                   {showImageGallery ? 'Hide' : 'Manage'} Images
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={handleNewBlog}
+                  className="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg font-medium transition-colors"
                 >
                   New Blog
-                </Button>
+                </button>
               </>
             )}
-            <Button
+            <button
               onClick={logout}
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
             >
               Logout
-            </Button>
+            </button>
           </div>
         </div>
       </header>
@@ -67,22 +68,18 @@ export default function Dashboard() {
           <BlogGenerator onBlogGenerated={handleBlogGenerated} />
         ) : (
           <div className="space-y-6">
-            {/* Rich Text Editor with Image Sidebar */}
             <RichTextEditor 
               blog={currentBlog} 
               onUpdate={handleBlogUpdate}
               images={currentBlog.images}
             />
 
-            {/* Export options */}
             <Export blog={currentBlog} editorContent={currentBlog?.content} />
 
-            {/* Separate Image Gallery (optional, can be toggled) */}
             {showImageGallery && (
               <ImageGallery blog={currentBlog} onUpdate={handleBlogUpdate} />
             )}
 
-            {/* Removed instructions panel as requested */}
           </div>
         )}
       </main>

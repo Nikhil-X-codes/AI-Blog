@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { blogAPI } from '../api';
-import Button from '../pages/Button';
 
 const REGENERATION_ACTIONS = [
   {
@@ -71,8 +70,7 @@ export function TextRegenerationToolbar({
       }
 
     } catch (error) {
-      console.error('Regeneration error:', error);
-      alert('Failed to regenerate text. Please try again.');
+      alert(error.message || 'Failed to process text. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -90,7 +88,6 @@ export function TextRegenerationToolbar({
       }
 
     } catch (error) {
-      console.error('Tone change error:', error);
       alert('Failed to change tone. Please try again.');
     } finally {
       setLoading(false);
@@ -101,55 +98,63 @@ export function TextRegenerationToolbar({
 
   return (
     <div
-      className="fixed bg-gray-900 rounded-lg shadow-2xl border-2 border-blue-500 z-50 p-3"
+      className="fixed bg-gray-900 rounded-xl shadow-2xl border-2 border-blue-500 z-50"
       style={{
         top: `${position.top}px`,
         left: `${position.left}px`,
-        transform: 'translateX(-50%)'
+        transform: 'translateX(-50%)',
+        minWidth: '280px'
       }}
     >
       {showTonePicker ? (
-        <div className="p-2">
-          <div className="flex items-center justify-between mb-2">
-            <h4 className="text-sm font-bold text-white">Select Tone</h4>
-            <Button
+        <div className="p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-base font-bold text-white flex items-center gap-2">
+              <span>🎨</span> Select Tone
+            </h4>
+            <button
               onClick={() => setShowTonePicker(false)}
+              className="text-gray-400 hover:text-white transition-colors p-1 hover:bg-gray-800 rounded"
             >
               ✕
-            </Button>
+            </button>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex flex-col gap-2">
             {TONES.map((tone) => (
-              <Button
+              <button
                 key={tone}
                 onClick={() => handleChangeTone(tone)}
                 disabled={loading}
+                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
               >
                 {tone.charAt(0).toUpperCase() + tone.slice(1)}
-              </Button>
+              </button>
             ))}
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2 p-3">
           {REGENERATION_ACTIONS.map((action) => (
-            <Button
+            <button
               key={action.id}
               onClick={() => handleAction(action.id)}
               disabled={loading}
+              title={action.description}
+              className="px-3 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm rounded-lg font-medium transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-1 whitespace-nowrap shadow-md"
             >
-              <span className="mr-1">{action.icon}</span>
-              {action.label}
-            </Button>
+              <span>{action.icon}</span>
+              <span>{action.label}</span>
+            </button>
           ))}
           
-          <div className="w-px h-6 bg-gray-300 mx-1" />
+          <div className="w-px h-8 bg-gray-700" />
           
-          <Button
+          <button
             onClick={onClose}
+            className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded-lg font-medium transition-all"
           >
             Close
-          </Button>
+          </button>
         </div>
       )}
 

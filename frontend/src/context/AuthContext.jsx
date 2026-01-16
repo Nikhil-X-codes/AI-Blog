@@ -17,8 +17,6 @@ export const AuthProvider = ({ children }) => {
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
-      console.error('Error restoring auth state:', error);
-      // Clear invalid data
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     } finally {
@@ -33,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', authToken);
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
-      console.error('Error saving auth state:', error);
+      // Silent error handling
     }
   };
 
@@ -44,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     } catch (error) {
-      console.error('Error during logout:', error);
+      // Silent error handling
     }
   };
 

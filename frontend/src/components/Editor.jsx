@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { blogAPI } from '../api';
-import Button from '../pages/Button';
 
 const TONES = [
   { value: 'professional', label: 'Professional' },
@@ -70,7 +69,6 @@ export default function Editor({
           setSelectedText('');
         }
       } catch (error) {
-        console.error('Selection error:', error);
         setHasSelection(false);
         setSelectedText('');
       }

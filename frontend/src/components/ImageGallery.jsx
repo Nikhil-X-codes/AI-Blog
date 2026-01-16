@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { blogAPI } from '../api';
-import Button from '../pages/Button';
 
 export default function ImageGallery({ blog, onUpdate }) {
   const [uploading, setUploading] = useState(false);
@@ -64,12 +63,12 @@ export default function ImageGallery({ blog, onUpdate }) {
                 {image.prompt || 'No prompt'}
               </p>
               <div className="flex gap-2">
-                <Button
+                <button
                   onClick={() => handleRemoveImage(index)}
-                  className="flex-1"
+                  className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
                 >
                   Remove
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -80,9 +79,12 @@ export default function ImageGallery({ blog, onUpdate }) {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Image</h3>
         <div className="flex gap-3 items-center">
           <label className="cursor-pointer">
-            <Button disabled={uploading} loading={uploading}>
+            <button
+              disabled={uploading}
+              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               {uploading ? 'Uploading...' : 'Upload Image'}
-            </Button>
+            </button>
             <input
               type="file"
               accept="image/*"

@@ -13,8 +13,8 @@ export const authAPI = {
 };
 
 export const blogAPI = {
-  generateBlog: async (topic, tone, keywords = '', format) => {
-    const payload = { topic, tone, keywords };
+  generateBlog: async (topic, tone, format) => {
+    const payload = { topic, tone };
     if (format) payload.format = format;
     const response = await api.post('/blog/generate', payload);
     return response.data;

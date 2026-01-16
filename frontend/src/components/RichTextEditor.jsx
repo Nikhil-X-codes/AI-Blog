@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { blogAPI } from '../api';
-import Button from '../pages/Button';
 
 const TONES = [
   { value: 'professional', label: 'Professional' },
@@ -62,7 +61,7 @@ export default function RichTextEditor({ blog, onUpdate, images }) {
           response = await blogAPI.rewriteText(blog.blogId, selectedText, blog.tone);
           break;
         case 'improveSEO':
-          response = await blogAPI.improveSEO(blog.blogId, selectedText, blog.seo?.keywords);
+          response = await blogAPI.improveSEO(blog.blogId, selectedText);
           break;
         case 'changeTone':
           response = await blogAPI.changeTone(blog.blogId, selectedText, tone);
@@ -92,44 +91,49 @@ export default function RichTextEditor({ blog, onUpdate, images }) {
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">Edit Blog</h3>
         <div className="flex items-center gap-2">
-          <Button
+          <button
             onClick={() => setPreviewMode(!previewMode)}
+            className="px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors text-sm"
           >
             {previewMode ? '✏️ Edit' : '👁️ Preview'}
-          </Button>
+          </button>
           {hasSelection && (
             <div className="flex items-center gap-1">
-              <Button
+              <button
                 onClick={() => handleTextAction('rewrite')}
                 disabled={processing}
+                className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {processing ? 'Working...' : 'Rewrite'}
-              </Button>
-              <Button
+              </button>
+              <button
                 onClick={() => handleTextAction('improveSEO')}
                 disabled={processing}
+                className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {processing ? 'Working...' : 'Improve SEO'}
-              </Button>
+              </button>
               <div className="relative">
-                <Button
+                <button
                   onClick={() => setShowToneMenu((v) => !v)}
                   disabled={processing}
+                  className="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {processing ? 'Working...' : 'Change Tone'}
-                </Button>
+                </button>
                 {showToneMenu && (
-                  <div className="absolute right-0 mt-2 bg-white border-2 border-blue-400 rounded-lg shadow-2xl p-3 w-48 z-50">
-                    <div className="text-sm font-semibold text-gray-900 mb-2">Select Tone</div>
-                    <div className="grid grid-cols-2 gap-2">
+                  <div className="absolute right-0 mt-2 bg-white border-2 border-blue-400 rounded-lg shadow-2xl p-4 w-56 z-50">
+                    <div className="text-sm font-semibold text-gray-900 mb-3">Select Tone</div>
+                    <div className="flex flex-col gap-2">
                       {TONES.map(tone => (
-                        <Button
+                        <button
                           key={tone.value}
                           onClick={() => handleTextAction('changeTone', tone.value)}
                           disabled={processing}
+                          className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                         >
                           {tone.label}
-                        </Button>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -137,13 +141,13 @@ export default function RichTextEditor({ blog, onUpdate, images }) {
               </div>
             </div>
           )}
-          <Button
+          <button
             onClick={handleSave}
             disabled={saving}
-            loading={saving}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saving ? 'Saving...' : 'Save Changes'}
-          </Button>
+          </button>
         </div>
       </div>
 

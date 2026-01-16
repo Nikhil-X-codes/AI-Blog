@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Editor from './Editor';
 import Export from './Export';
-import Button from '../pages/Button';
 
 
 export default function BlogEditor({ blog, onUpdate, images = [] }) {
@@ -21,21 +20,20 @@ export default function BlogEditor({ blog, onUpdate, images = [] }) {
   return (
     <div className="space-y-6">
       <div className="flex gap-4 border-b border-gray-800">
-        <Button
+        <button
           onClick={() => setActiveTab('edit')}
-          className={activeTab === 'edit' ? 'border-blue-500 text-blue-400' : 'text-gray-400'}
+          className={`px-4 py-2 font-medium transition-colors ${activeTab === 'edit' ? 'border-b-2 border-blue-500 text-blue-400' : 'text-gray-400 hover:text-gray-300'}`}
         >
           ✏️ Edit
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setActiveTab('export')}
-          className={activeTab === 'export' ? 'border-blue-500 text-blue-400' : 'text-gray-400'}
+          className={`px-4 py-2 font-medium transition-colors ${activeTab === 'export' ? 'border-b-2 border-blue-500 text-blue-400' : 'text-gray-400 hover:text-gray-300'}`}
         >
           📥 Export
-        </Button>
+        </button>
       </div>
 
-      {/* Tab Content */}
       {activeTab === 'edit' && (
         <Editor
           blog={blog}

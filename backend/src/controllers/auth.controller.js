@@ -21,7 +21,7 @@ export const signup = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 5);
 
     const user = await User.create({
       name,
@@ -45,7 +45,6 @@ export const signup = async (req, res) => {
       }
     });
   } catch (err) {
-    console.error("Signup error:", err);
     res.status(500).json({ 
       success: false,
       message: "Signup failed", 
@@ -97,7 +96,6 @@ export const login = async (req, res) => {
       }
     });
   } catch (err) {
-    console.error('Login error:', err);
     res.status(500).json({ 
       success: false,
       message: "Login failed", 

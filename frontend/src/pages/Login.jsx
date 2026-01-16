@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../api';
 import { useAuth } from '../context/AuthContext';
-import Button from './Button';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -114,16 +113,13 @@ export default function Login() {
                   </div>
                 </div>
 
-                {/* Remember me removed as requested */}
-
-                <Button
+                <button
                   type="submit"
                   disabled={loading}
-                  loading={loading}
-                  className="w-full"
+                  className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Signing in...' : 'Sign in'}
-                </Button>
+                </button>
 
               </form>
               <div className="mt-8 text-xs text-gray-500 flex items-center justify-between">

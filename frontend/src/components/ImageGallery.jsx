@@ -16,9 +16,10 @@ export default function ImageGallery({ blog, onUpdate }) {
 
     try {
       await blogAPI.removeImageFromBlog(blog.blogId, index);
-      const updatedImages = blog.images.filter((_, idx) => idx !== index);
+      const updatedImages = (blog.images || []).filter((_, idx) => idx !== index);
       onUpdate({ ...blog, images: updatedImages });
     } catch (err) {
+      console.error('Remove error:', err);
       alert('Failed to remove image');
     }
   };
@@ -27,16 +28,35 @@ export default function ImageGallery({ blog, onUpdate }) {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select a valid image file');
+      event.target.value = '';
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+    if (file.size > maxSize) {
+      alert('Image size must be less than 10MB');
+      event.target.value = '';
+      return;
+    }
+
     setUploading(true);
     try {
       const dataUrl = await readFileAsDataUrl(file);
       const response = await blogAPI.addImageToBlog(blog.blogId, dataUrl);
       if (response?.image) {
-        onUpdate({ ...blog, images: [...blog.images, response.image] });
+        const updatedImages = [...(blog.images || []), response.image];
+        onUpdate({ ...blog, images: updatedImages });
+      } else {
+        throw new Error('No image returned from server');
       }
     } catch (err) {
       console.error('Upload error:', err);
-      alert(`Failed to upload image: ${err.response?.data?.message || err.message}`);
+      const errorMessage = err.response?.data?.message || err.message || 'Unknown error occurred';
+      alert(`Failed to upload image: ${errorMessage}`);
     } finally {
       setUploading(false);
       event.target.value = '';

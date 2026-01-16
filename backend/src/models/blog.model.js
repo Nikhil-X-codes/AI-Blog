@@ -13,7 +13,6 @@ const blogSchema = new mongoose.Schema(
     images: [
       {
         url: String,
-        prompt: String,
         source: String 
       }
     ],

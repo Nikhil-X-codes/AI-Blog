@@ -7,8 +7,10 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json'
   },
-  timeout: 30000,
-  withCredentials: false
+  timeout: 300000,
+  withCredentials: false,
+  maxContentLength: Infinity,
+  maxBodyLength: Infinity
 });
 
 api.interceptors.request.use(
@@ -45,7 +47,6 @@ api.interceptors.response.use(
       code: error.code
     });
     
-    // Don't redirect on 401 during login/signup
     if (status === 401 && !error.config?.url?.includes('/auth/')) {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('token');

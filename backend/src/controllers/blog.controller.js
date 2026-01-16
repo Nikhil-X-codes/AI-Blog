@@ -63,7 +63,7 @@ export const generateCompleteBlog = asyncHandler(async (req, res) => {
       title: blog.title,
       tone: blog.tone,
       content: blog.content,
-      images: blog.images,
+      images: blog.images || [],
       createdAt: blog.createdAt
     }
   });

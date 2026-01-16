@@ -5,6 +5,8 @@ export const addImageToBlog = asyncHandler(async (req, res) => {
   const { blogId } = req.params;
   const { imageUrl } = req.body;
 
+  console.log('addImageToBlog called:', { blogId, hasImageUrl: !!imageUrl, imageUrlLength: imageUrl?.length });
+
   if (!blogId) {
     throw new AppError('Blog ID is required', 400);
   }
@@ -26,11 +28,18 @@ export const addImageToBlog = asyncHandler(async (req, res) => {
     throw new AppError('Blog not found', 404);
   }
 
+  // Ensure images array exists
+  if (!blog.images) {
+    blog.images = [];
+  }
+
   const image = { url: imageUrl, source: 'manual' };
   blog.images.push(image);
   await blog.save();
 
   const savedImage = blog.images[blog.images.length - 1];
+
+  console.log('Image added successfully:', { imageId: savedImage._id, totalImages: blog.images.length });
 
   res.status(200).json({
     success: true,

@@ -29,8 +29,37 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-black to-black px-4 py-12">
-      <section className="order-1 relative w-full max-w-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-black to-black px-4 py-12 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating gradient orbs - more of them */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-indigo-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500/15 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-3000" />
+        <div className="absolute bottom-10 right-10 w-72 h-72 bg-pink-500/15 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-5000" />
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]" />
+        
+        {/* Moving particles - increased quantity */}
+        <div className="absolute top-10 left-10 w-2 h-2 bg-blue-400 rounded-full animate-float" />
+        <div className="absolute top-20 right-20 w-1 h-1 bg-purple-400 rounded-full animate-float animation-delay-1000" />
+        <div className="absolute bottom-20 left-1/4 w-1.5 h-1.5 bg-indigo-400 rounded-full animate-float animation-delay-2000" />
+        <div className="absolute top-1/2 right-10 w-2 h-2 bg-blue-300 rounded-full animate-float animation-delay-3000" />
+        <div className="absolute top-1/4 right-1/3 w-1 h-1 bg-cyan-400 rounded-full animate-float animation-delay-4000" />
+        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-pink-400 rounded-full animate-float animation-delay-5000" />
+        <div className="absolute top-3/4 left-10 w-1.5 h-1.5 bg-violet-400 rounded-full animate-float animation-delay-1500" />
+        <div className="absolute bottom-10 left-1/2 w-1 h-1 bg-sky-400 rounded-full animate-float animation-delay-2500" />
+        <div className="absolute top-40 left-1/3 w-2 h-2 bg-purple-300 rounded-full animate-float animation-delay-3500" />
+        <div className="absolute bottom-40 right-1/3 w-1.5 h-1.5 bg-blue-300 rounded-full animate-float animation-delay-4500" />
+        
+        {/* Animated lines */}
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-blue-500/20 to-transparent animate-pulse" />
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-purple-500/20 to-transparent animate-pulse animation-delay-2000" />
+      </div>
+
+      <section className="order-1 relative w-full max-w-2xl z-10">
         <div className="group relative w-full h-full">
           <div className="absolute inset-0 rounded-2xl overflow-hidden">
             <div className="pointer-events-none absolute -inset-10 rounded-full bg-gradient-to-r from-transparent via-slate-800/30 to-transparent blur-xl opacity-40 animate-spin [animation-duration:10s]" />

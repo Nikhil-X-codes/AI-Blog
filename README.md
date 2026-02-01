@@ -16,7 +16,7 @@ AI Blog Generator is a modern web application that automates blog content creati
 - **📤 Multiple Export Formats** - Export blogs to PDF, DOCX, and Markdown
 - **🔐 User Authentication** - Secure signup/login with JWT-based authentication
 - **🎯 Tone Selection** - Choose from multiple writing tones (professional, casual, formal, etc.)
-- **🐳 Docker Support** - Easy deployment with Docker and Docker Compose
+
 
 ## 🛠️ Tech Stack
 

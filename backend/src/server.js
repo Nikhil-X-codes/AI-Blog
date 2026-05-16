@@ -4,6 +4,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import authRoutes from "./routes/auth.routes.js";
+import blogRoutes from "./routes/blog.routes.js";
 
 dotenv.config();
 
@@ -30,6 +32,10 @@ app.get("/", (req, res) => {
 app.get("/api/ping", (req, res) => {
   res.status(200).json({ message: "pong" });
 });
+
+// API Routes
+app.use("/auth", authRoutes);
+app.use("/blog", blogRoutes);
 
 // Simple 404 handler
 app.use((req, res) => {
